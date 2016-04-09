@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.30501.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Pang", "Pang\Pang.vcxproj", "{2A2B9818-3B72-41BC-B8A0-EBB9E65B3312}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Asteroids", "Asteroids\Asteroids.vcxproj", "{0EFFDEF3-92AE-42FF-8D11-2CD8D41580BD}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{2A2B9818-3B72-41BC-B8A0-EBB9E65B3312}.Debug|Win32.ActiveCfg = Debug|Win32
+		{2A2B9818-3B72-41BC-B8A0-EBB9E65B3312}.Debug|Win32.Build.0 = Debug|Win32
+		{2A2B9818-3B72-41BC-B8A0-EBB9E65B3312}.Release|Win32.ActiveCfg = Release|Win32
+		{2A2B9818-3B72-41BC-B8A0-EBB9E65B3312}.Release|Win32.Build.0 = Release|Win32
+		{0EFFDEF3-92AE-42FF-8D11-2CD8D41580BD}.Debug|Win32.ActiveCfg = Debug|Win32
+		{0EFFDEF3-92AE-42FF-8D11-2CD8D41580BD}.Debug|Win32.Build.0 = Debug|Win32
+		{0EFFDEF3-92AE-42FF-8D11-2CD8D41580BD}.Release|Win32.ActiveCfg = Release|Win32
+		{0EFFDEF3-92AE-42FF-8D11-2CD8D41580BD}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
