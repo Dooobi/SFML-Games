@@ -8,6 +8,10 @@ void SplashScreen::show(sf::RenderWindow& renderWindow) {
 
 	sf::Sprite sprite(texture);
 
+	float scaleX = (float)renderWindow.getSize().x / texture.getSize().x;
+	float scaleY = (float)renderWindow.getSize().y / texture.getSize().y;
+	sprite.setScale(scaleX, scaleY);
+
 	renderWindow.draw(sprite);
 	renderWindow.display();
 

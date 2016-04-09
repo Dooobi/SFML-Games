@@ -4,13 +4,16 @@
 #include "VisibleGameObject.h"
 
 class Asteroid_Big 
-	: VisibleGameObject 
+	: public VisibleGameObject 
 {
 public:
 	Asteroid_Big();
 	~Asteroid_Big();
-private:
 
+	void update(float elapsedTime);
+
+private:
+	float _velocity;
 };
 
 #endif

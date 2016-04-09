@@ -14,6 +14,7 @@
 #include <assert.h>
 #include <math.h>
 #include <iostream>
+#include <random>
 
 #include "SFML/Window.hpp"
 #include "SFML/Graphics.hpp"

@@ -4,6 +4,7 @@
 #include "MainMenu.h"
 
 #include "Spacefighter.h"
+#include "Asteroid_Big.h"
 
 void Game::start(void)
 {
@@ -11,16 +12,23 @@ void Game::start(void)
 		return;
 	}
 
-	_mainWindow.create(sf::VideoMode(500, 500), "Asteroids");
+	_mainWindow.create(sf::VideoMode(SCREEN_WIDTH, SCREEN_HEIGHT), "Asteroids");
 	_gameState = Game::ShowingSplash;
 
 	Spacefighter *player1 = new Spacefighter();
 	player1->load("Spacefighter.png");
+	player1->setScale(1.2f, 1.2f);
 	player1->setPosition(_mainWindow.getSize().x / 2, _mainWindow.getSize().y / 2);
 
 	_gameObjectManager.add("Player1", player1);
-	_gameState = Game::ShowingSplash;
 
+	Asteroid_Big *asteroid = new Asteroid_Big();
+	asteroid->load("Asteroid_Big.png");
+	asteroid->setPosition(100, 100);
+
+	_gameObjectManager.add("Asteroid1", asteroid);
+
+	_gameState = Game::ShowingSplash;
 	sf::Clock clock;
 	while (!isExiting()) {
 		gameLoop(clock.restart().asSeconds());

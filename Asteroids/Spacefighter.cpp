@@ -4,12 +4,12 @@
 
 Spacefighter::Spacefighter() :
 _motorPower(0),
-_acceleration(100),
+_acceleration(400),
 _velocity(0),
 _maxVelocity(9500.0f),	// not really needed because at high speed the friction caps the velocity (velocity loss by friction increases with speed)
 _turnrate(0),
-_maxTurnrate(230.0f),
-_friction(0.4f)
+_maxTurnrate(270.0f),
+_friction(1.5f)
 {
 	load("images/Spacefighter.png");
 	assert(isLoaded());
@@ -58,8 +58,8 @@ void Spacefighter::update(float elapsedTime)
 		_motorPower = -1.0f;
 	}
 
-	_velocity += (_motorPower * _acceleration);
-	_velocity *= 1.0f - _friction;
+	// Computing velocity
+	_velocity += (_motorPower * _acceleration - _velocity * _friction) * elapsedTime;
 
 	if (_turnrate > _maxTurnrate)
 		_turnrate = _maxTurnrate;
@@ -93,14 +93,16 @@ void Spacefighter::update(float elapsedTime)
 
 	float moveX = -1 * _velocity * cos((getSprite().getRotation() + 90) * PI / 180.0) * elapsedTime;
 	float moveY = -1 * _velocity * sin((getSprite().getRotation() + 90) * PI / 180.0) * elapsedTime;
-
+	/*
 	system("cls");
 	std::cout << "El. Time: " << elapsedTime << std::endl;
 	std::cout << "Turnrate: " << _turnrate << std::endl;
 	std::cout << "Velocity: " << _velocity << std::endl;
 	std::cout << "Move X  : " << moveX << std::endl;
 	std::cout << "Move Y  : " << moveY << std::endl;
-
+	std::cout << "Coord X : " << getPosition().x << std::endl;
+	std::cout << "Coord Y : " << getPosition().y << std::endl;
+	*/
 	getSprite().rotate(-1 * _turnrate * elapsedTime);
 	getSprite().move(moveX, moveY);
 }

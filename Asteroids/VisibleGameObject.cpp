@@ -49,6 +49,17 @@ sf::Vector2f VisibleGameObject::getPosition() const
 	}
 }
 
+void VisibleGameObject::setSize(int width, int height)
+{
+	sf::Vector2u textureSize = _sprite.getTexture()->getSize();
+	_sprite.setScale(float(width) / textureSize.x, float(height) / textureSize.y);
+}
+
+void VisibleGameObject::setScale(float widthScale, float heightScale)
+{
+	_sprite.setScale(widthScale, heightScale);
+}
+
 sf::Sprite& VisibleGameObject::getSprite()
 {
 	return _sprite;

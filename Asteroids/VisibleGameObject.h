@@ -12,6 +12,8 @@ public:
 
 	virtual void setPosition(float x, float y);
 	virtual sf::Vector2f getPosition() const;
+	virtual void setSize(int width, int height);
+	virtual void setScale(float widthScale, float heightScale);
 	virtual bool isLoaded() const;
 
 protected:
