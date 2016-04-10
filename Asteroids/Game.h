@@ -11,10 +11,11 @@ public:
 	const static sf::InputStream& getInput();
 	const static int SCREEN_WIDTH = 800;
 	const static int SCREEN_HEIGHT = 800;
+	static GameObjectManager _gameObjectManager;
 
 private:
 	static bool isExiting();
-	static void gameLoop(float elapsedTime);
+	static void gameLoop(float elapsedTime, std::string name);
 
 	static void showSplashScreen();
 	static void showMenu();
@@ -24,8 +25,6 @@ private:
 
 	static GameState _gameState;
 	static sf::RenderWindow _mainWindow;
-	
-	static GameObjectManager _gameObjectManager;
 };
 
 #endif

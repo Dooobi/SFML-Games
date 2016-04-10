@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "GameObjectManager.h"
+#include "Asteroid_Big.h"
 
 GameObjectManager::GameObjectManager()
 {
@@ -22,6 +23,23 @@ void GameObjectManager::remove(std::string name)
 	{
 		delete results->second;
 		_gameObjects.erase(results);
+	}
+	std::cout << "Deleting Object" << std::endl;
+	std::cout << "New Object Count: " << getObjectCount() << std::endl;
+}
+
+void GameObjectManager::removeDestroyingObjects()
+{
+	std::map<std::string, VisibleGameObject*> buffer(_gameObjects);
+	std::map<std::string, VisibleGameObject*>::iterator itr = buffer.begin();
+
+	while (itr != buffer.end())
+	{
+		if (itr->second->isDestroying())
+		{
+			remove(itr->first);
+		}
+		itr++;
 	}
 }
 

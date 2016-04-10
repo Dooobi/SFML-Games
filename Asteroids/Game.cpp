@@ -16,22 +16,18 @@ void Game::start(void)
 	_gameState = Game::ShowingSplash;
 
 	Spacefighter *player1 = new Spacefighter();
-	player1->load("Spacefighter.png");
 	player1->setScale(1.2f, 1.2f);
 	player1->setPosition(_mainWindow.getSize().x / 2, _mainWindow.getSize().y / 2);
 
 	_gameObjectManager.add("Player1", player1);
 
-	Asteroid_Big *asteroid = new Asteroid_Big();
-	asteroid->load("Asteroid_Big.png");
-	asteroid->setPosition(100, 100);
-
-	_gameObjectManager.add("Asteroid1", asteroid);
-
 	_gameState = Game::ShowingSplash;
 	sf::Clock clock;
+	std::string name;
+	name = "a";
 	while (!isExiting()) {
-		gameLoop(clock.restart().asSeconds());
+		gameLoop(clock.restart().asSeconds(), name);
+		name += 1;
 	}
 
 	_mainWindow.close();
@@ -51,10 +47,10 @@ sf::RenderWindow& Game::getWindow()
 	return _mainWindow;
 }
 
-void Game::gameLoop(float elapsedTime) {
+void Game::gameLoop(float elapsedTime, std::string name) {
 	sf::Event currentEvent;
 
-	while (_mainWindow.pollEvent(currentEvent)) {
+	while (_mainWindow.pollEvent(currentEvent)) {	// Event-Handling
 		switch (_gameState) {
 			case Game::ShowingSplash:
 				break;
@@ -64,11 +60,16 @@ void Game::gameLoop(float elapsedTime) {
 				if (currentEvent.type == sf::Event::Closed) {
 					_gameState = Game::Exiting;
 				}
+				else if (currentEvent.type == sf::Event::KeyReleased)
+				{
+					system("cls");
+					_gameObjectManager.add(name, new Asteroid_Big());
+				}
 				break;
 		}
 	}
 
-	switch (_gameState) {
+	switch (_gameState) {		// Updating
 	case Game::ShowingSplash:
 		showSplashScreen();
 		break;
@@ -77,13 +78,15 @@ void Game::gameLoop(float elapsedTime) {
 		break;
 	case Game::Playing:
 		_mainWindow.clear(sf::Color(0, 0, 0));
+
+		if (_gameObjectManager.getObjectCount() < 20)
+			_gameObjectManager.add(name, new Asteroid_Big());
+	
 		_gameObjectManager.updateAll(elapsedTime);
+		_gameObjectManager.removeDestroyingObjects();
 		_gameObjectManager.drawAll(_mainWindow);
 		_mainWindow.display();
 
-		if (currentEvent.type == sf::Event::Closed) {
-			_gameState = Game::Exiting;
-		}
 		break;
 	}
 }

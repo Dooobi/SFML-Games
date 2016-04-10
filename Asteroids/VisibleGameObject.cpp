@@ -1,8 +1,10 @@
 #include "stdafx.h"
 #include "VisibleGameObject.h"
+#include "Game.h"
 
-VisibleGameObject::VisibleGameObject() : 
-	_isLoaded(false)
+VisibleGameObject::VisibleGameObject() :
+_isLoaded(false),
+_destroying(false)
 {
 }
 
@@ -41,6 +43,12 @@ void VisibleGameObject::setPosition(float x, float y)
 	}
 }
 
+void VisibleGameObject::setRotation(float angle)
+{
+	if (_isLoaded)
+		_sprite.setRotation(angle);
+}
+
 sf::Vector2f VisibleGameObject::getPosition() const
 {
 	if (_isLoaded)
@@ -68,4 +76,14 @@ sf::Sprite& VisibleGameObject::getSprite()
 bool VisibleGameObject::isLoaded() const
 {
 	return _isLoaded;
+}
+
+bool VisibleGameObject::isDestroying() const
+{
+	return _destroying;
+}
+
+void VisibleGameObject::setDestroying(bool destroying)
+{
+	_destroying = destroying;
 }

@@ -11,6 +11,7 @@ public:
 
 	void add(std::string name, VisibleGameObject* gameObject);
 	void remove(std::string name);
+	void removeDestroyingObjects();
 	int getObjectCount() const;
 	VisibleGameObject* get(std::string name) const;
 

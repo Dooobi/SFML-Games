@@ -11,11 +11,13 @@ public:
 	virtual void update(float elapsedTime);
 
 	virtual void setPosition(float x, float y);
+	virtual void setRotation(float angle);
 	virtual sf::Vector2f getPosition() const;
 	virtual void setSize(int width, int height);
 	virtual void setScale(float widthScale, float heightScale);
 	virtual bool isLoaded() const;
-
+	bool isDestroying() const;
+	void setDestroying(bool destroying);
 protected:
 	sf::Sprite& getSprite();
 
@@ -24,6 +26,7 @@ private:
 	sf::Texture _texture;
 	std::string _filename;
 	bool _isLoaded;
+	bool _destroying;
 };
 
 #endif

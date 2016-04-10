@@ -16,6 +16,8 @@
 #include <iostream>
 #include <random>
 
+#include "Math.h"
+
 #include "SFML/Window.hpp"
 #include "SFML/Graphics.hpp"
 
