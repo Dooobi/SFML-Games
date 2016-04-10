@@ -2,11 +2,11 @@
 #include "Asteroid_Big.h"
 #include "Game.h"
 
-Asteroid_Big::Asteroid_Big() :
-_currentFrameInbound(false),
-_previousFrameInbound(false)
+Asteroid_Big::Asteroid_Big(int hp) :
+	_currentFrameInbound(false),
+	_previousFrameInbound(false),
+	_hp(hp)
 {
-	std::cout << "Creating Asteroid:" << std::endl;	/// DEBUGGING
 	load("images/Asteroid_Big.png");
 	assert(isLoaded());
 	getSprite().setOrigin(getSprite().getLocalBounds().width / 2, getSprite().getLocalBounds().height / 2);

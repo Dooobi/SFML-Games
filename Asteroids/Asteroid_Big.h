@@ -7,7 +7,7 @@ class Asteroid_Big
 	: public VisibleGameObject 
 {
 public:
-	Asteroid_Big();
+	Asteroid_Big(int hp = 2);
 	~Asteroid_Big();
 
 	void update(float elapsedTime);
@@ -15,6 +15,8 @@ public:
 
 private:
 	void setInitialPosition(std::mt19937 mt);
+
+	int _hp;
 	float _velocity;
 	bool _previousFrameInbound;
 	bool _currentFrameInbound;

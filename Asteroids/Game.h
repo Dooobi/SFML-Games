@@ -2,6 +2,7 @@
 #define GAME_H
 
 #include "GameObjectManager.h"
+#include "InputHandler.h"
 
 class Game
 {
@@ -12,6 +13,7 @@ public:
 	const static int SCREEN_WIDTH = 800;
 	const static int SCREEN_HEIGHT = 800;
 	static GameObjectManager _gameObjectManager;
+	static InputHandler _inputHandler;
 
 private:
 	static bool isExiting();

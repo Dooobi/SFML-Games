@@ -3,8 +3,8 @@
 #include "Game.h"
 
 VisibleGameObject::VisibleGameObject() :
-_isLoaded(false),
-_destroying(false)
+	_isLoaded(false),
+	_destroying(false)
 {
 }
 

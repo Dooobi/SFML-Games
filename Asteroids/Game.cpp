@@ -60,11 +60,6 @@ void Game::gameLoop(float elapsedTime, std::string name) {
 				if (currentEvent.type == sf::Event::Closed) {
 					_gameState = Game::Exiting;
 				}
-				else if (currentEvent.type == sf::Event::KeyReleased)
-				{
-					system("cls");
-					_gameObjectManager.add(name, new Asteroid_Big());
-				}
 				break;
 		}
 	}
@@ -82,6 +77,7 @@ void Game::gameLoop(float elapsedTime, std::string name) {
 		if (_gameObjectManager.getObjectCount() < 20)
 			_gameObjectManager.add(name, new Asteroid_Big());
 	
+		_inputHandler.update();
 		_gameObjectManager.updateAll(elapsedTime);
 		_gameObjectManager.removeDestroyingObjects();
 		_gameObjectManager.drawAll(_mainWindow);
@@ -113,3 +109,4 @@ void Game::showMenu() {
 Game::GameState Game::_gameState = Uninitialized;
 sf::RenderWindow Game::_mainWindow;
 GameObjectManager Game::_gameObjectManager;
+InputHandler Game::_inputHandler;

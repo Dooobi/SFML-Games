@@ -83,6 +83,8 @@
     <ClInclude Include="Asteroid_Big.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameObjectManager.h" />
+    <ClInclude Include="InputHandler.h" />
+    <ClInclude Include="Laserbeam.h" />
     <ClInclude Include="MainMenu.h" />
     <ClInclude Include="Math.h" />
     <ClInclude Include="Spacefighter.h" />
@@ -96,6 +98,8 @@
     <ClCompile Include="Asteroids.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GameObjectManager.cpp" />
+    <ClCompile Include="InputHandler.cpp" />
+    <ClCompile Include="Laserbeam.cpp" />
     <ClCompile Include="MainMenu.cpp" />
     <ClCompile Include="Math.cpp" />
     <ClCompile Include="Spacefighter.cpp" />

@@ -15,6 +15,7 @@
 #include <math.h>
 #include <iostream>
 #include <random>
+#include <vector>
 
 #include "Math.h"
 

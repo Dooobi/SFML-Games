@@ -2,12 +2,13 @@
 #define SPACEFIGHTER_H
 
 #include "VisibleGameObject.h"
+#include "Laserbeam.h"
 
 class Spacefighter :
 	public VisibleGameObject 
 {
 public:
-	Spacefighter();
+	Spacefighter(int hp = 2);
 	~Spacefighter();
 
 	void update(float elapsedTime);
@@ -17,6 +18,11 @@ public:
 	float getDirection() const;
 
 private:
+	void shoot();
+	void movement(float elapsedTime);
+
+	std::vector<Laserbeam> laserbeams;
+	int _hp;
 	float _motorPower;
 	float _acceleration;
 	float _velocity;
@@ -24,6 +30,9 @@ private:
 	float _turnrate;
 	float _maxTurnrate;
 	float _friction;
+	float _cooldown;
+	float _maxCooldown;
+	bool _autoShoot;
 };
 
 #endif

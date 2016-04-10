@@ -18,6 +18,7 @@ public:
 	virtual bool isLoaded() const;
 	bool isDestroying() const;
 	void setDestroying(bool destroying);
+
 protected:
 	sf::Sprite& getSprite();
 

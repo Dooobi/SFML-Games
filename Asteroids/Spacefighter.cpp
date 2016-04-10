@@ -2,14 +2,18 @@
 #include "Spacefighter.h"
 #include "Game.h"
 
-Spacefighter::Spacefighter() :
-_motorPower(0),
-_acceleration(400),
-_velocity(0),
-_maxVelocity(9500.0f),	// not really needed because at high speed the friction caps the velocity (velocity loss by friction increases with speed)
-_turnrate(0),
-_maxTurnrate(270.0f),
-_friction(1.5f)
+Spacefighter::Spacefighter(int hp) :
+	_motorPower(0),
+	_acceleration(400),
+	_velocity(0),
+	_maxVelocity(9500.0f),	// not really needed because at high speed the friction caps the velocity (velocity loss by friction increases with speed)
+	_turnrate(0),
+	_maxTurnrate(270.0f),
+	_friction(1.5f),
+	_cooldown(0.0f),
+	_maxCooldown(0.2f),
+	_hp(hp),
+	_autoShoot(false)
 {
 	load("images/Spacefighter.png");
 	assert(isLoaded());
@@ -24,6 +28,13 @@ Spacefighter::~Spacefighter()
 void Spacefighter::draw(sf::RenderWindow& renderWindow)
 {
 	VisibleGameObject::draw(renderWindow);
+
+	for (int i = 0; i < laserbeams.size(); i++)
+	{
+		if (laserbeams[i].isLoaded()) {
+			laserbeams[i].draw(renderWindow);
+		}
+	}
 }
 
 float Spacefighter::getVelocity() const
@@ -32,6 +43,21 @@ float Spacefighter::getVelocity() const
 }
 
 void Spacefighter::update(float elapsedTime)
+{
+	if (Game::_inputHandler.isKeyPressed(sf::Keyboard::I))
+		_autoShoot = !_autoShoot;
+
+	_cooldown -= (_cooldown > 0) * elapsedTime;	// if _cooldown > 0: reduce by elapsedTime
+	movement(elapsedTime);
+	shoot();
+
+	for (int i = 0; i < laserbeams.size(); i++)
+	{
+		laserbeams[i].update(elapsedTime);
+	}
+}
+
+void Spacefighter::movement(float elapsedTime)
 {
 	_turnrate = 0.0f;
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
@@ -105,4 +131,19 @@ void Spacefighter::update(float elapsedTime)
 	*/
 	getSprite().rotate(-1 * _turnrate * elapsedTime);
 	getSprite().move(moveX, moveY);
+}
+
+void Spacefighter::shoot()
+{
+	if ((_autoShoot || Game::_inputHandler.isKeyDown(sf::Keyboard::Space))
+	//if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space)
+		&& _cooldown <= 0.0f)
+	{
+		Laserbeam laserbeam = Laserbeam(1, 1000.0f);
+		laserbeam.setPosition(getPosition().x, getPosition().y);
+		laserbeam.setRotation(getSprite().getRotation());
+
+		laserbeams.push_back(laserbeam);
+		_cooldown = _maxCooldown;
+	}	
 }
