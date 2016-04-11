@@ -23,11 +23,8 @@ void Game::start(void)
 
 	_gameState = Game::ShowingSplash;
 	sf::Clock clock;
-	std::string name;
-	name = "a";
 	while (!isExiting()) {
-		gameLoop(clock.restart().asSeconds(), name);
-		name += 1;
+		gameLoop(clock.restart().asSeconds());
 	}
 
 	_mainWindow.close();
@@ -47,7 +44,7 @@ sf::RenderWindow& Game::getWindow()
 	return _mainWindow;
 }
 
-void Game::gameLoop(float elapsedTime, std::string name) {
+void Game::gameLoop(float elapsedTime) {
 	sf::Event currentEvent;
 
 	while (_mainWindow.pollEvent(currentEvent)) {	// Event-Handling
@@ -75,7 +72,7 @@ void Game::gameLoop(float elapsedTime, std::string name) {
 		_mainWindow.clear(sf::Color(0, 0, 0));
 
 		if (_gameObjectManager.getObjectCount() < 20)
-			_gameObjectManager.add(name, new Asteroid_Big());
+			_gameObjectManager.add("Asteroid", new Asteroid_Big());
 	
 		_inputHandler.update();
 		_gameObjectManager.updateAll(elapsedTime);

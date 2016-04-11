@@ -19,7 +19,6 @@ public:
 	bool isDestroying() const;
 	void setDestroying(bool destroying);
 
-protected:
 	sf::Sprite& getSprite();
 
 private:

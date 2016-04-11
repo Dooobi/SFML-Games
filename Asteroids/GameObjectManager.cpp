@@ -18,37 +18,43 @@ void GameObjectManager::add(std::string name, VisibleGameObject* gameObject)
 
 void GameObjectManager::remove(std::string name)
 {
-	std::map<std::string, VisibleGameObject*>::iterator results = _gameObjects.find(name);
+	std::multimap<std::string, VisibleGameObject*>::iterator results = _gameObjects.find(name);
 	if (results != _gameObjects.end())
 	{
 		delete results->second;
 		_gameObjects.erase(results);
 	}
-	std::cout << "Deleting Object" << std::endl;
-	std::cout << "New Object Count: " << getObjectCount() << std::endl;
+}
+
+void GameObjectManager::remove(VisibleGameObject* object)
+{
+
 }
 
 void GameObjectManager::removeDestroyingObjects()
 {
-	std::map<std::string, VisibleGameObject*> buffer(_gameObjects);
-	std::map<std::string, VisibleGameObject*>::iterator itr = buffer.begin();
+	std::multimap<std::string, VisibleGameObject*> buffer(_gameObjects);
+	std::multimap<std::string, VisibleGameObject*>::iterator itr = buffer.begin();
 
 	while (itr != buffer.end())
 	{
 		if (itr->second->isDestroying())
 		{
-			remove(itr->first);
+			remove(itr->second);
 		}
 		itr++;
 	}
 }
 
-VisibleGameObject* GameObjectManager::get(std::string name) const
+std::vector<VisibleGameObject*> GameObjectManager::get(std::string name) const
 {
-	std::map<std::string, VisibleGameObject*>::const_iterator results = _gameObjects.find(name);
-	if (results == _gameObjects.end())
-		return NULL;
-	return results->second;
+	std::vector<VisibleGameObject*> vec;
+
+	std::multimap<std::string, VisibleGameObject*>::const_iterator results = _gameObjects.find(name);
+	while (results != _gameObjects.end())
+		vec.push_back(results->second);
+
+	return vec;
 }
 
 int GameObjectManager::getObjectCount() const
@@ -58,7 +64,7 @@ int GameObjectManager::getObjectCount() const
 
 void GameObjectManager::drawAll(sf::RenderWindow& renderWindow)
 {
-	std::map<std::string, VisibleGameObject*>::const_iterator itr = _gameObjects.begin();
+	std::multimap<std::string, VisibleGameObject*>::const_iterator itr = _gameObjects.begin();
 	while (itr != _gameObjects.end())
 	{
 		itr->second->draw(renderWindow);
@@ -68,7 +74,7 @@ void GameObjectManager::drawAll(sf::RenderWindow& renderWindow)
 
 void GameObjectManager::updateAll(float elapsedTime)
 {
-	std::map<std::string, VisibleGameObject*>::const_iterator itr = _gameObjects.begin();
+	std::multimap<std::string, VisibleGameObject*>::const_iterator itr = _gameObjects.begin();
 	
 	while (itr != _gameObjects.end())
 	{

@@ -17,7 +17,7 @@ public:
 
 private:
 	static bool isExiting();
-	static void gameLoop(float elapsedTime, std::string name);
+	static void gameLoop(float elapsedTime);
 
 	static void showSplashScreen();
 	static void showMenu();

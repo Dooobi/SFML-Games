@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "Laserbeam.h"
 #include "Game.h"
+#include "Asteroid_Big.h"
 
 Laserbeam::Laserbeam(int damage, float velocity) : 
 	_damage(damage),
@@ -22,6 +23,8 @@ void Laserbeam::update(float elapsedTime)
 
 	getSprite().move(moveX, moveY);
 
+	collision();
+
 	sf::FloatRect windowBounds(0, 0, Game::SCREEN_WIDTH, Game::SCREEN_HEIGHT);
 
 	if (getSprite().getGlobalBounds().intersects(windowBounds))
@@ -36,4 +39,22 @@ void Laserbeam::update(float elapsedTime)
 	}
 
 	_previousFrameInbound = _currentFrameInbound;
+}
+
+void Laserbeam::collision()
+{
+	std::cout << "test" << std::endl;
+	std::vector<VisibleGameObject*> vec = Game::_gameObjectManager.get("Asteroid");
+	sf::FloatRect boundsAsteroid;
+	sf::FloatRect boundsLaserbeam = getSprite().getGlobalBounds();
+
+	for (int i = 0; i < vec.size(); i++)
+	{
+		boundsAsteroid = ((Asteroid_Big*)vec[i])->getSprite().getGlobalBounds();
+		if (boundsLaserbeam.intersects(boundsAsteroid))
+		{
+			vec[i]->setDestroying(true);
+			setDestroying(true);
+		}
+	}
 }

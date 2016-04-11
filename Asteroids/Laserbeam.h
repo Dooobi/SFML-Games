@@ -12,6 +12,8 @@ public:
 	void update(float elapsedTime);
 
 private:
+	void collision();
+
 	float _velocity;
 	int _damage;
 	bool _previousFrameInbound;

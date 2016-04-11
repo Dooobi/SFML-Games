@@ -11,15 +11,16 @@ public:
 
 	void add(std::string name, VisibleGameObject* gameObject);
 	void remove(std::string name);
+	void remove(VisibleGameObject* object);
 	void removeDestroyingObjects();
 	int getObjectCount() const;
-	VisibleGameObject* get(std::string name) const;
+	std::vector<VisibleGameObject*> get(std::string name) const;
 
 	void drawAll(sf::RenderWindow& renderWindow);
 	void updateAll(float elapsedTime);
 
 private:
-	std::map<std::string, VisibleGameObject*> _gameObjects;
+	std::multimap<std::string, VisibleGameObject*> _gameObjects;
 
 	struct GameObjectDeallocator
 	{
